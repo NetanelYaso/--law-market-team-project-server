@@ -4,7 +4,7 @@ const lawyersModel= require ('./lawyersModel')
 const usersModel= require ('./usersModel')
 
 const ordersSchema = schema({
-  orderNum: { type: String, required: true },
+  orderNum: { type: String, required: true, unique:true },
   lawyer: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
