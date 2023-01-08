@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
-const reviewsModel= require ('./reviewsModel')
-const departmentsModel= require ('./departmentsModel')
-const ordersModel= require ('./ordersModel')
-
 
 const lawyersSchema = schema({
   name:{type:String, required:true},
@@ -20,7 +16,7 @@ const lawyersSchema = schema({
     }],
     departments:[{
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      // required: true,
       ref: "department",
     }],
     orders:[{

@@ -79,7 +79,6 @@ const logInOrSignUpFunc = async (req, res) => {
   if (error) return res.status(400).json(error);
   const email = req.body.user.email;
   const user = await userModel.findOne({ email });
-  console.log(user);
   if (!user) {
     return register(req, res);
   } else {

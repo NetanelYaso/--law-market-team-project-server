@@ -12,9 +12,9 @@ const {
 
 router.get("/", getAll);
 router.get("/byId", getById);
-router.post("/log-in__sign-up", logInOrSignUpFunc);
-router.post("/log-in", logIn);
-router.post("/sign-up", register);
+router.post("/log-In__rgister", logInOrSignUpFunc);
+router.post("/log-In", logIn);
+router.post("/register", register);
 router.put("/update", update);
 router.delete("/delete", deleteUser)
 

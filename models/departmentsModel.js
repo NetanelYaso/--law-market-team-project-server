@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
-const lawyersModel= require ('./lawyersModel')
 
 const departmentsSchema = schema({
   name: { type: String, required: true },
+  categories: [{ type: String, required: true }],
   active:{type:Boolean,required:true},
   coverImage:{
     public_id:{type:String, required:true}, 
@@ -11,7 +11,7 @@ const departmentsSchema = schema({
 },
   lawyers: [{
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
+    // required: true,
     ref: "lawyer",
   }],
 }, { timestamps: true });
