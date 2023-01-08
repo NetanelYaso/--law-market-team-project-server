@@ -10,7 +10,7 @@ const {
 
 router.get("/", getAll);
 router.get("/byId", getById);
-router.post("/saveData", create);
+router.post("/create", create);
 router.put("/update", update);
 router.delete("/delete", deleteOrder)
 

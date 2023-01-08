@@ -12,8 +12,8 @@ const {
 
 router.get("/", getAll);
 router.get("/byId", getById);
-router.post("/log-In__rgister", logInOrSignUpFunc);
-router.post("/log-In", logIn);
+router.post("/logIn__rgister", logInOrSignUpFunc);
+router.post("/logIn", logIn);
 router.post("/register", register);
 router.put("/update", update);
 router.delete("/delete", deleteUser)

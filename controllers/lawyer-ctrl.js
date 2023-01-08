@@ -1,5 +1,7 @@
 const lawyerModel = require("../models/lawyersModel");
 const validateLawyer = require("../validation/lawyerValidation");
+const cloudinary = require("../cloudinary/cloudinary");
+
 const key = process.env.SECRET_KEY;
 const getAll = async (req, res) => {
     await lawyerModel.find({})
@@ -26,20 +28,21 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
-  const { error } = validateLawyer(req.body.lawyer);
+
+  const { error } = validateLawyer(req.body);
   if (error) return res.status(400).json(error);
     try {
-        if(req.body.lawyer.avatar){
-        const avatar  = req.body.lawyer.avatar;
+        if(req.body.avatar){
+        const avatar  = req.body.avatar;
       const result = await cloudinary.uploader.upload(avatar, {
         folder: "team_project_lawyers",
       });
-      req.body.lawyer.avatar= {
+      req.body.avatar= {
         public_id: result.public_id,
         url: result.secure_url,
       }
     }
-        await lawyerModel.insertMany(req.body.lawyer)
+        await lawyerModel.insertMany(req.body)
             .then((result) => res.status(300).json({ success: true, massage: result }))
             .catch(error => res.status(400).json({ success: false, error}))
     } 
@@ -49,7 +52,7 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    lawyerModel.findByIdAndUpdate(req.body.lawyer)
+    lawyerModel.findByIdAndUpdate(req.body)
         .then((lawyers) => res.status(200).json({ sucsess: true, lawyers }))
         .catch(error => res.status(400).json({ success: false, error }))
 }

@@ -7,7 +7,7 @@ const port = process.env.PORT;
 require("./DB")
 app.use(express.json({ exteneded: true }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({origin:"*"}));
 
 const usersRouter=require("./routes/usersRoute")
 const departmentsRouter=require("./routes/departmentsRoute")

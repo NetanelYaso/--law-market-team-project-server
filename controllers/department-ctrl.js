@@ -1,5 +1,7 @@
 const departmentModel = require("../models/departmentsModel");
 const validateDepartment = require("../validation/departmentValidation");
+const cloudinary = require("../cloudinary/cloudinary");
+
 const getAll = async (req, res) => {
   await departmentModel.find({}).then((departments, error) => {
     if (error) {
@@ -25,13 +27,20 @@ const getById = async (req, res) => {
 };
 
 const create = async (req, res) => {
-    console.log(req.body.department);
-  const { error } = validateDepartment(req.body.department);
+  const { error } = validateDepartment(req.body);
   if (error) return res.status(400).json(error);
+  const coverImage = req.body.coverImage;
+  const result = await cloudinary.uploader.upload(coverImage, {
+    folder: "team_project_departments",
+  });
+  req.body.coverImage = {
+    public_id: result.public_id,
+    url: result.secure_url,
+  };
   return await departmentModel
-    .insertMany(req.body.department)
-    .then((result) => res.status(300).json({ success: true, massage: result }))
-    .catch((error) => res.status(400).json({ success: false, error }));
+    .insertMany(req.body)
+    .then((result) =>{ console.log("rrrrrrrr"); res.status(300).json({ success: true, massage: result })})
+    .catch((error) =>{  console.log("huhuh");res.status(400).json({ success: false, error:`${error} faail`})});
 };
 
 const update = async (req, res) => {
