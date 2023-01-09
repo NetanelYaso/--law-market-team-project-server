@@ -6,12 +6,13 @@ const departmentsSchema = schema({
   categories: [{
     type: mongoose.Schema.Types.ObjectId,
     // required: true,
-    ref: "subDepartment",}],
-  active:{type:Boolean,required:true},
-  coverImage:{
-    public_id:{type:String, required:true}, 
-    url:{type:String, required:true}, 
-},
+    ref: "subDepartment",
+  }],
+  active: { type: Boolean, required: true },
+  coverImage: {
+    public_id: { type: String, required: true },
+    url: { type: String, required: true },
+  },
   lawyers: [{
     type: mongoose.Schema.Types.ObjectId,
     // required: true,

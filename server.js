@@ -7,19 +7,19 @@ const port = process.env.PORT;
 require("./DB")
 app.use(express.json({ exteneded: true }));
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({origin:"*"}));
+app.use(cors({ origin: "*" }));
 
-const usersRouter=require("./routes/usersRoute")
-const departmentsRouter=require("./routes/departmentsRoute")
-const reviewsRouter=require("./routes/reviewsRoute")
-const ordersRouter=require("./routes/ordersRoute")
-const lawyersRouter=require("./routes/lawyersRoute")
+const usersRouter = require("./routes/usersRoute")
+const departmentsRouter = require("./routes/departmentsRoute")
+const reviewsRouter = require("./routes/reviewsRoute")
+const ordersRouter = require("./routes/ordersRoute")
+const lawyersRouter = require("./routes/lawyersRoute")
 
-app.use("/users",usersRouter)
-app.use("/departments",departmentsRouter)
-app.use("/reviews",reviewsRouter)
-app.use("/orders",ordersRouter)
-app.use("/lawyers",lawyersRouter)
+app.use("/users", usersRouter)
+app.use("/departments", departmentsRouter)
+app.use("/reviews", reviewsRouter)
+app.use("/orders", ordersRouter)
+app.use("/lawyers", lawyersRouter)
 
 
 app.get("/", (req, res) => {

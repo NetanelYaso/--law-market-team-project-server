@@ -7,7 +7,7 @@ module.exports =  validateLawyer = (lawyer) => {
         phone: Joi.string().min(9).max(18).required(),
         experience: Joi.string().required(),
         departments:Joi.required(),
-        avatar: Joi.required(),
+        // avatar: Joi.required(),
     });
     const{error}=schema.validate(lawyer, {abortEarly:false});
     return {error}

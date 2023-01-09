@@ -2,28 +2,28 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const lawyersSchema = schema({
-  name:{type:String, required:true},
-  email:{type:String, required:true},
-  phone:{type:String, required:true},
-  experience:{type:String, required:true},
-    avatar: { 
-      public_id:{type:String, required:true}, 
-      url:{type:String, required:true}, 
-    },
-    reviews: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "review",
-    }],
-    departments:[{
-      type: mongoose.Schema.Types.ObjectId,
-      // required: true,
-      ref: "department",
-    }],
-    orders:[{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "order",
-    }],
-  }, { timestamps: true });
-  const lawyerModel = mongoose.model("lawyer", lawyersSchema);
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true },
+  experience: { type: String, required: true },
+  // avatar: { 
+  //   public_id:{type:String, required:true}, 
+  //   url:{type:String, required:true}, 
+  // },
+  reviews: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "review",
+  }],
+  departments: [{
+    type: mongoose.Schema.Types.ObjectId,
+    // required: true,
+    ref: "department",
+  }],
+  orders: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "order",
+  }],
+}, { timestamps: true });
+const lawyerModel = mongoose.model("lawyer", lawyersSchema);
 
-  module.exports = lawyerModel
+module.exports = lawyerModel

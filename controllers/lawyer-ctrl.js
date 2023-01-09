@@ -28,25 +28,26 @@ const getById = async (req, res) => {
 
 const create = async (req, res) => {
 
-  const { error } = validateLawyer(req.body);
-  if (error) return res.status(400).json(error);
+    const { error } = validateLawyer(req.body);
+    if (error) return res.status(400).json(error);
     try {
-        if(req.body.avatar){
-        const avatar  = req.body.avatar;
-      const result = await cloudinary.uploader.upload(avatar, {
-        folder: "team_project_lawyers",
-      });
-      req.body.avatar= {
-        public_id: result.public_id,
-        url: result.secure_url,
-      }
-    }
-        await lawyerModel.insertMany(req.body)
+        //     if(req.body.avatar){
+        //     const avatar  = req.body.avatar;
+        //   const result = await cloudinary.uploader.upload(avatar, {
+        //     folder: "team_project_lawyers",
+        //   });
+        //   req.body.avatar= {
+        //     public_id: result.public_id,
+        //     url: result.secure_url,
+        //   }
+
+        // }
+        return await lawyerModel.insertMany(req.body)
             .then((result) => res.status(300).json({ success: true, massage: result }))
-            .catch(error => res.status(400).json({ success: false, error}))
-    } 
+            .catch(error => res.status(400).json({ success: false, error }))
+    }
     catch (err) {
-      return console.log({ success: false, err});
+        return console.log({ success: false, err });
     }
 }
 

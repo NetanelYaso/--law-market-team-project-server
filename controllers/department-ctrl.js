@@ -39,8 +39,8 @@ const create = async (req, res) => {
   };
   return await departmentModel
     .insertMany(req.body)
-    .then((result) =>{ console.log("rrrrrrrr"); res.status(300).json({ success: true, massage: result })})
-    .catch((error) =>{  console.log("huhuh");res.status(400).json({ success: false, error:`${error} faail`})});
+    .then((result) => { console.log("rrrrrrrr"); res.status(300).json({ success: true, massage: result }) })
+    .catch((error) => { console.log("huhuh"); res.status(400).json({ success: false, error: `${error} faail` }) });
 };
 
 const update = async (req, res) => {

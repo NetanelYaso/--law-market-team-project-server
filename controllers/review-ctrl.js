@@ -25,8 +25,8 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
-  const { error } = validateReview(req.body.review);
-  if (error) return res.status(400).json(error);
+    const { error } = validateReview(req.body.review);
+    if (error) return res.status(400).json(error);
     await reviewModel.insertMany(req.body.review)
         .then((result) => res.status(300).json({ success: true, massage: result }))
         .catch(error => res.status(400).json({ success: false, error }))
