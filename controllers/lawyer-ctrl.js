@@ -2,7 +2,6 @@ const lawyerModel = require("../models/lawyersModel");
 const validateLawyer = require("../validation/lawyerValidation");
 const cloudinary = require("../cloudinary/cloudinary");
 
-const key = process.env.SECRET_KEY;
 const getAll = async (req, res) => {
     await lawyerModel.find({})
         .then((lawyers, error) => {
