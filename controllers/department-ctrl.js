@@ -1,4 +1,5 @@
 const departmentModel = require("../models/departmentsModel");
+const subDepartmentModel = require("../models/subDepartmentsModel");
 const validateDepartment = require("../validation/departmentValidation");
 const cloudinary = require("../cloudinary/cloudinary");
 
@@ -37,6 +38,12 @@ const create = async (req, res) => {
     public_id: result.public_id,
     url: result.secure_url,
   };
+  if(req.body.subDepartment.name !=[] && req.body.subDepartment.description != ""){
+    // const newSubDepartment={name:req.body.subDepartment[0],description:req.body.description}
+    subDepartmentModel.insertMany(req.body.subDepartment)
+    .then((result=>{req.body.subDepartment=result._id}))
+    .catch((error) => res.status(400).json({ success: false, error }));
+  }
   return await departmentModel
     .insertMany(req.body)
     .then((result) =>{ console.log("rrrrrrrr"); res.status(300).json({ success: true, massage: result })})

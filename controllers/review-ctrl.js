@@ -25,15 +25,15 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
-  const { error } = validateReview(req.body.review);
+  const { error } = validateReview(req.body);
   if (error) return res.status(400).json(error);
-    await reviewModel.insertMany(req.body.review)
+    await reviewModel.insertMany(req.body)
         .then((result) => res.status(300).json({ success: true, massage: result }))
         .catch(error => res.status(400).json({ success: false, error }))
 }
 
 const update = async (req, res) => {
-    reviewModel.findByIdAndUpdate(req.body.review)
+    reviewModel.findByIdAndUpdate(req.body)
         .then((reviews) => res.status(200).json({ sucsess: true, reviews }))
         .catch(error => res.status(400).json({ success: false, error }))
 }

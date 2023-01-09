@@ -25,15 +25,15 @@ const getById = async (req, res) => {
 }
 
 const create = async (req, res) => {
-    const { error } = validateOrder(req.body.order);
+    const { error } = validateOrder(req.body);
     if (error) return res.status(400).json(error);
-    await orderModel.insertMany(req.body.order)
+    await orderModel.insertMany(req.body)
         .then((result) => res.status(300).json({ success: true, massage: result }))
         .catch(error => res.status(400).json({ success: false, error }))
 }
 
 const update = async (req, res) => {
-    orderModel.findByIdAndUpdate(req.body.order)
+    orderModel.findByIdAndUpdate(req.body)
         .then((orders) => res.status(200).json({ sucsess: true, orders }))
         .catch(error => res.status(400).json({ success: false, error }))
 }
