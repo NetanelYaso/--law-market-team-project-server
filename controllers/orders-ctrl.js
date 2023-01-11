@@ -33,7 +33,7 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    orderModel.findByIdAndUpdate(req.body)
+    orderModel.findByIdAndUpdate(req.params.id,req.body)
         .then((orders) => res.status(200).json({ sucsess: true, orders }))
         .catch(error => res.status(400).json({ success: false, error }))
 }

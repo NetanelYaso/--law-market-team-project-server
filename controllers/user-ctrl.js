@@ -88,7 +88,7 @@ const logInOrSignUpFunc = async (req, res) => {
 
 const update = async (req, res) => {
   userModel
-    .findByIdAndUpdate(req.body.user)
+    .findByIdAndUpdate(req.params.id,req.body)
     .then((users) => res.status(200).json({ sucsess: true, users }))
     .catch((error) => res.status(400).json({ success: false, error }));
 };
