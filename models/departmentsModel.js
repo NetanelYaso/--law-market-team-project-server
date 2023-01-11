@@ -3,7 +3,7 @@ const schema = mongoose.Schema;
 
 const departmentsSchema = schema({
   name: { type: String, required: true },
-  subDepartment: [{
+  subDepartments: [{
     type: mongoose.Schema.Types.ObjectId,
     // required: true,
     ref: "subDepartment",}],
@@ -14,7 +14,7 @@ const departmentsSchema = schema({
       default:
         "https://res.cloudinary.com/dtcgejl11/image/upload/v1673277784/team_project_lawyers/gxi78yqf4eclrsncct3z.webp"}, 
 },
-  lawyers: [{
+  lawyers: [{ 
     type: mongoose.Schema.Types.ObjectId,
     // required: true,
     ref: "lawyer",

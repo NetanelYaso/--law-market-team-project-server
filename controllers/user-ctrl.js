@@ -37,7 +37,7 @@ const logIn = async (req, res, user) => {
   if (isMatch) {
     const payload = {
       id: user._id,
-      email: user.email,  
+      email: user.email,
     };
     jwt.sign(payload, key, (err, token) => {
       if (err) return res.status(400).json({ err });
@@ -53,20 +53,33 @@ const register = async (req, res) => {
   const hashedPassword = await bcrypt.hash(req.body.user.password, salt);
   req.body.user.password = hashedPassword;
   try {
-    if(req.body.user.avatar){
-    const avatar = req.body.user.avatar;
-    const result = await cloudinary.uploader.upload(avatar, {
-      folder: "team_project_users",
-    });
-    req.body.user.avatar = {
-      public_id: result.public_id,
-      url: result.secure_url,
-    };
-}
+    if (req.body.user.avatar) {
+      const avatar = req.body.user.avatar;
+      const result = await cloudinary.uploader.upload(avatar, {
+        folder: "team_project_users",
+      });
+      req.body.user.avatar = {
+        public_id: result.public_id,
+        url: result.secure_url,
+      };
+    }
     await userModel
       .insertMany(req.body.user)
-      .then(() => {
-        res.json({ massage: `success in adding ${req.body.user.email}` });
+      .then((user) => {
+        const payload = {
+          id: user._id,
+          email: user.email,
+        };
+        jwt.sign(payload, key, (err, token) => {
+          if (err) return res.status(400).json({ err });
+          return res
+            .header("authToken", token)
+            .json({
+              user,
+              token,
+              massage: `success in adding ${req.body.user.email}`,
+            });
+        });
       })
       .catch((err) => console.log(err));
   } catch (err) {
