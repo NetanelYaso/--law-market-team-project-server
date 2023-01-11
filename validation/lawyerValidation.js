@@ -9,7 +9,7 @@ module.exports =  validateLawyer = (lawyer) => {
         workTime: Joi.string().required(),
         location: Joi.string().required(),
         responseTime: Joi.string().required(),
-        departments:Joi.required(),
+        // departments:Joi.required(),
     });
     const{error}=schema.validate(lawyer, {abortEarly:false});
     return {error}

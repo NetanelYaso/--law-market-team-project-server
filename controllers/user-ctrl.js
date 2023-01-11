@@ -65,8 +65,21 @@ const register = async (req, res) => {
     }
     await userModel
       .insertMany(req.body.user)
-      .then(() => {
-        res.json({ massage: `success in adding ${req.body.user.email}` });
+      .then((user) => {
+        const payload = {
+          id: user._id,
+          email: user.email,
+        };
+        jwt.sign(payload, key, (err, token) => {
+          if (err) return res.status(400).json({ err });
+          return res
+            .header("authToken", token)
+            .json({
+              user,
+              token,
+              massage: `success in adding ${req.body.user.email}`,
+            });
+        });
       })
       .catch((err) => console.log(err));
   } catch (err) {

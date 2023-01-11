@@ -11,11 +11,11 @@ const {
 
 
 router.get("/", getAll);
-router.get("/byId", getById);
+router.get("/byId/:id", getById);
 router.post("/logIn__register", logInOrSignUpFunc);
 router.post("/logIn", logIn);
 router.post("/register", register);
-router.put("/update", update);
-router.delete("/delete", deleteUser)
+router.put("/update/:id", update);
+router.delete("/delete/:id", deleteUser)
 
 module.exports = router;

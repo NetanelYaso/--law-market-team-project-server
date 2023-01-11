@@ -38,17 +38,20 @@ const create = async (req, res) => {
     public_id: result.public_id,
     url: result.secure_url,
   };
-  if(req.body.subDepartment.name !=[] && req.body.subDepartment.description != ""){
-    // const newSubDepartment={name:req.body.subDepartment[0],description:req.body.description}
-    subDepartmentModel.insertMany(req.body.subDepartment)
-    .then((result=>{req.body.subDepartment=result._id}))
-    .catch((error) => res.status(400).json({ success: false, error }));
+  const subDepartment = await subDepartmentModel.insertMany({ name: req.body.subDepartments.name, description: req.body.subDepartments.description })
+  req.body.subDepartments = subDepartment
+
+  try {
+    return await departmentModel
+      .insertMany(req.body)
+      .then((result) => res.status(300).json({ success: true, result }))
   }
-  return await departmentModel
-    .insertMany(req.body)
-    .then((result) => { console.log("rrrrrrrr"); res.status(300).json({ success: true, massage: result }) })
-    .catch((error) => { console.log("huhuh"); res.status(400).json({ success: false, error: `${error} faail` }) });
-};
+  catch (err) {
+    return res.status(400).json({ success: false, error: err })
+  };
+
+}
+
 
 const update = async (req, res) => {
   departmentModel
