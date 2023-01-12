@@ -6,7 +6,7 @@ module.exports =  validateDeparment = (department) => {
         active: Joi.boolean().required(),
         coverImage: Joi.required(),
         // lawyers: Joi.required(),
-        subDepartments:Joi.object()
+        subDepartments:Joi.allow()
     });
     const{error}=schema.validate(department, {abortEarly:false});
     return {error}

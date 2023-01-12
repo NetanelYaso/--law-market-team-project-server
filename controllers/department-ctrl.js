@@ -38,7 +38,7 @@ const create = async (req, res) => {
     public_id: result.public_id,
     url: result.secure_url,
   };
-  const subDepartment=await subDepartmentModel.insertMany({name:req.body.subDepartments.name,description:req.body.subDepartments.description})
+  const subDepartment=await subDepartmentModel.insertMany(req.body.subDepartments)
   req.body.subDepartments=subDepartment
 
   try{return await departmentModel
