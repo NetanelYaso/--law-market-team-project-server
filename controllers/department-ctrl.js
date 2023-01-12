@@ -54,7 +54,7 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   departmentModel
-    .findByIdAndUpdate(req.body.params.id,req.body)
+    .findByIdAndUpdate(req.params.id,req.body)
     .then((departments) => res.status(200).json({ sucsess: true, departments }))
     .catch((error) => res.status(400).json({ success: false, error }));
 };
