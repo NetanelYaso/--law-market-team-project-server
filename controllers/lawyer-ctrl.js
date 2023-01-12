@@ -1,6 +1,5 @@
 const lawyerModel = require("../models/lawyersModel");
 const validateLawyer = require("../validation/lawyerValidation");
-const cloudinary = require("../cloudinary/cloudinary");
 
 const getAll = async (req, res) => {
     await lawyerModel.find({})
@@ -52,7 +51,7 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
-    lawyerModel.findByIdAndUpdate(req.body)
+  await lawyerModel.findByIdAndUpdate(req.params.id,req.body)
         .then((lawyers) => res.status(200).json({ sucsess: true, lawyers }))
         .catch(error => res.status(400).json({ success: false, error }))
 }

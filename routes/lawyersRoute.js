@@ -9,9 +9,9 @@ const {
 
 
 router.get("/", getAll);
-router.get("/byId/:id", getById);
+router.get("/byId", getById);
 router.post("/create", create);
-router.put("/update/:id", update);
-router.delete("/delete/:id", deleteLawyer)
+router.put("/update", update);
+router.delete("/delete", deleteLawyer)
 
 module.exports = router;
