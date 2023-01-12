@@ -38,8 +38,8 @@ const create = async (req, res) => {
     public_id: result.public_id,
     url: result.secure_url,
   };
-  const subDepartment = await subDepartmentModel.insertMany({ name: req.body.subDepartments.name, description: req.body.subDepartments.description })
-  req.body.subDepartments = subDepartment
+  const subDepartment=await subDepartmentModel.insertMany(req.body.subDepartments)
+  req.body.subDepartments=subDepartment
 
   try {
     return await departmentModel
@@ -55,7 +55,7 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   departmentModel
-    .findByIdAndUpdate(req.body.department)
+    .findByIdAndUpdate(req.params.id,req.body)
     .then((departments) => res.status(200).json({ sucsess: true, departments }))
     .catch((error) => res.status(400).json({ success: false, error }));
 };
