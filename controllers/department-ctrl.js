@@ -4,7 +4,7 @@ const validateDepartment = require("../validation/departmentValidation");
 const cloudinary = require("../cloudinary/cloudinary");
 
 const getAll = async (req, res) => {
-  await departmentModel.find({}).then((departments, error) => {
+  await departmentModel.find({}).populate("subDepartments").then((departments, error) => {
     if (error) {
       return res.status(400).json({ success: false, error });
     }
