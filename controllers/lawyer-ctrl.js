@@ -3,7 +3,7 @@ const validateLawyer = require("../validation/lawyerValidation");
 const cloudinary = require("../cloudinary/cloudinary");
 
 const getAll = async (req, res) => {
-    await lawyerModel.find({}).populate("reviews")
+    await lawyerModel.find({}).populate(["reviews", "departments"])
         .then((lawyers, error) => {
             if (error) {
                 return res.status(400).json({ success: false, error });
@@ -16,7 +16,7 @@ const getAll = async (req, res) => {
 }
 
 const getById = async (req, res) => {
-    await lawyerModel.findById(req.params.id).populate("reviews")
+    await lawyerModel.findById(req.params.id).populate(["reviews", "departments"])
         .then((lawyer) => {
             if (!lawyer) {
                 return res.json({ success: false, massage: "lawyer is not found" });
