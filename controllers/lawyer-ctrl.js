@@ -3,7 +3,7 @@ const validateLawyer = require("../validation/lawyerValidation");
 const cloudinary = require("../cloudinary/cloudinary");
 
 const getAll = async (req, res) => {
-    await lawyerModel.find({})
+    await lawyerModel.find({}).populate("reviews")
         .then((lawyers, error) => {
             if (error) {
                 return res.status(400).json({ success: false, error });
@@ -16,7 +16,7 @@ const getAll = async (req, res) => {
 }
 
 const getById = async (req, res) => {
-    await lawyerModel.findById(req.params.id)
+    await lawyerModel.findById(req.params.id).populate("reviews")
         .then((lawyer) => {
             if (!lawyer) {
                 return res.json({ success: false, massage: "lawyer is not found" });
@@ -51,6 +51,17 @@ const create = async (req, res) => {
 }
 
 const update = async (req, res) => {
+    console.log(req.body);
+    if (req.body.avatar){
+        const avatar  = req.body.avatar;
+        const result = await cloudinary.uploader.upload(avatar, {
+          folder: "team_project_lawyers",
+        });
+        req.body.avatar= {
+          public_id: result.public_id,
+          url: result.secure_url,
+        }
+    }
     lawyerModel.findByIdAndUpdate(req.params.id,req.body)
         .then((lawyers) => res.status(200).json({ sucsess: true, lawyers }))
         .catch(error => res.status(400).json({ success: false, error }))

@@ -43,16 +43,24 @@ const create = async (req, res) => {
 
   try{return await departmentModel
     .insertMany(req.body)
-    .then((result) =>{ console.log("rrrrrrrr"); res.status(300).json({ success: true, result })})
+    .then((result) =>{; res.status(300).json({ success: true, result })})
   }
   catch(err){
   console.log("huhuh");res.status(400).json({ success: false, error:err})
 };
-
 }
 
-
 const update = async (req, res) => {
+  if (req.body.coverImage){
+    const coverImage  = req.body.coverImage;
+    const result = await cloudinary.uploader.upload(coverImage, {
+      folder: "team_project_lawyers",
+    });
+    req.body.coverImage= {
+      public_id: result.public_id,
+      url: result.secure_url,
+    }
+}
   departmentModel
     .findByIdAndUpdate(req.params.id,req.body)
     .then((departments) => res.status(200).json({ sucsess: true, departments }))

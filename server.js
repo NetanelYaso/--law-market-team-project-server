@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 const port = process.env.PORT;
 require("./DB")
-app.use(express.json({ exteneded: true }));
+app.use(express.json({limit:"5mb", exteneded: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({origin:"*"}));
 

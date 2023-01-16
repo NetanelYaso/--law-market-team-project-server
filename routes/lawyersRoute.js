@@ -11,7 +11,7 @@ const {
 router.get("/", getAll);
 router.get("/byId/:id", getById);
 router.post("/create", create);
-router.put("/update:id", update);
-router.delete("/delete:id", deleteLawyer)
+router.put("/update/byId/:id", update);
+router.delete("/delete//byId/:id", deleteLawyer)
 
 module.exports = router;
